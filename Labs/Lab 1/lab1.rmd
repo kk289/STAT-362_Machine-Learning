@@ -1,0 +1,72 @@
+---
+title: "Stat-362 Lab 1"
+author: "Isaac Sermersheim, kevil Khadka, Rijan Giri"
+date: "January 16, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+# 1
+```{r}
+baseball <- read_csv("baseball.csv")
+```
+
+# 2
+```{r}
+baseball <- mutate(baseball, League_Ind = ifelse(League == "AL", 0, 1))
+```
+
+# 3
+```{r}
+baseball <- select(baseball, Team, League, League_Ind, everything())
+```
+
+# 4
+```{r}
+baseball <- mutate(baseball, Singles = Hits - Doubles - Triples - HomeRuns) %>% 
+  select(Team, League, League_Ind, Wins, Runs, Hits, Singles, everything())
+```
+
+#5
+```{r}
+baseball <- mutate(baseball, Stolen_pct = StolenBases/Hits)
+```
+
+# 6
+```{r}
+cor(baseball$Runs, baseball$Stolen_pct)
+ggplot(baseball) + geom_point(aes(Stolen_pct, Runs))
+```
+
+# 7
+```{r}
+baseball %>% 
+  group_by(League) %>% 
+  summarize(Wins = mean(Wins),
+            Runs = mean(Runs),
+            Hits = mean(Hits))
+```
+
+# 8
+```{r}
+baseball %>% 
+  filter(HomeRuns >= 130, RBI < 600)
+```
+
+Teams that had at least 130 home runs and less than 600 RBIs were Chicago Cubs, Cincinnati Reds, Houston Astros, New York Yankees.
+
+# 9
+```{r}
+max(baseball$Doubles)
+```
+
+Detroit Tigers had the most doubles.
+
+# 10
+```{r}
+ggplot(baseball) + geom_bar(aes(Team, Runs, fill = League), stat = "identity") + coord_flip()
+```
