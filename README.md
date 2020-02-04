@@ -1,6 +1,7 @@
 # STAT-362_Machine-Learning
-SPRING 2020
-
 Author: Kevil Khadka
 
-Lab 1- Baseball Dataset
+1. Lab 
+ - Baseball Dataset
+ 
+2. Credit Card Fraud Detection
