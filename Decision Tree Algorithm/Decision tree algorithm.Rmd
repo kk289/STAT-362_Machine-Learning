@@ -12,6 +12,7 @@ library(dplyr)
 library(mice)
 library(rpart)
 library(rpart.plot)
+library(caret)
 ```
 
 
@@ -142,7 +143,7 @@ print(paste('Accuracy for test', accuracy_test))
 
 
 ```{r}
-# Make a prediction
+# Make a prediction using train_data 
 
 predict_unseen_1 <-predict(fit, train_data, type = 'class')
 ```
@@ -162,6 +163,20 @@ print(paste('Accuracy for test', accuracy_train))
 
 # It has score of 81.66% for the train dataset.
 ```
+
+
+# Measuring the accuracy using caret library
+```{r}
+library(caret)
+confusionMatrix(test_data$survived, predict_unseen, positive = "Saved")
+
+# accurary of 0.7901 (for test data) which is same as using accuracy_test formula. 
+
+confusionMatrix(train_data$survived, predict_unseen_1, positive = "Saved")
+
+# accurary of 0.8032 (for test data) which is same as using accuracy_train formula.
+```
+
 
 
 ## Tune the hyper-parameters
