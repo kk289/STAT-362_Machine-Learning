@@ -5,3 +5,4 @@ Author: Kevil Khadka
  - Baseball Dataset
  
 2. Credit Card Fraud Detection
+3. Decision Tree Algorithm on Titanic Dataset
